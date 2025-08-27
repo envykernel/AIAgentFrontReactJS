@@ -1,69 +1,115 @@
-# React + TypeScript + Vite
+# Assistant IA - Chatbot Interface
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive chatbot interface built with React, TypeScript, and Vite. The application features a clean design with a green and white theme, perfect for AI assistant interactions.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Modern UI Design**: Clean, responsive interface with green (#157347) and white color scheme
+- **Real-time Chat**: Interactive chat window with AI assistant and user messages
+- **Status Indicators**: Connection status, session ID, and timer display
+- **Action Buttons**: Quick access buttons for common actions
+- **Responsive Layout**: Works seamlessly on desktop and mobile devices
+- **TypeScript**: Full type safety and modern development experience
 
-## Expanding the ESLint configuration
+## Layout Components
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Header Section
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Title**: "Assistant IA" in green text
+- **Connection Status**: Shows connection endpoint (http://localhost:5121)
+- **Status Panel**: WiFi icon, session ID, and session timer
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Chat Window
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Message Display**: Chat bubbles with AI robot icons and user messages
+- **Action Buttons**: "hello" button and user profile button
+- **Message History**: Scrollable conversation history
+
+### Message Input
+
+- **Text Input**: Multi-line textarea with placeholder text
+- **Send Button**: Paper plane icon for sending messages
+- **Reset Button**: Blue outlined button to reset conversation
+- **Helper Text**: Instructions for keyboard shortcuts
+- **Profile Button**: Bottom-left circular button with "N"
+
+## Keyboard Shortcuts
+
+- **Enter**: Send message
+- **Shift + Enter**: New line in message
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (version 16 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository or navigate to the project directory
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Development
+
+Start the development server:
+
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The application will be available at `http://localhost:5173`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Building for Production
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Create a production build:
+
+```bash
+npm run build
 ```
+
+The built files will be in the `dist/` directory.
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── Header.tsx          # Header with title and status indicators
+│   ├── ChatWindow.tsx      # Main chat interface
+│   └── MessageInput.tsx    # Message input and controls
+├── App.tsx                 # Main application component
+├── App.css                 # Application styles
+├── main.tsx               # Application entry point
+└── index.css              # Global styles
+```
+
+## Technologies Used
+
+- **React 18**: Modern React with hooks
+- **TypeScript**: Type-safe JavaScript
+- **Vite**: Fast build tool and dev server
+- **CSS3**: Modern styling with flexbox and CSS Grid
+- **ESLint**: Code quality and consistency
+
+## Customization
+
+The application can be easily customized by modifying:
+
+- Color scheme in `src/App.css`
+- Component behavior in individual component files
+- Message handling logic in `src/App.tsx`
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## License
+
+This project is open source and available under the MIT License.
