@@ -1,8 +1,6 @@
 import React from 'react'
-import BotIcon from '@mui/icons-material/SmartToy'
-import PersonIcon from '@mui/icons-material/Person'
 import PauseIcon from '@mui/icons-material/Pause'
-import MessageBlock from './MessageBlock'
+import Message from './Message'
 
 interface Message {
   id: number
@@ -17,24 +15,10 @@ interface ChatWindowProps {
 }
 
 const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isStreaming = false }) => {
-  const handleHelloClick = () => {
-    console.log('Hello button clicked!')
-    // You can add any logic here for when hello is clicked
-  }
-
   return (
     <div className="chat-window">
       <div className="chat-header">
         <div className="action-buttons">
-          <MessageBlock 
-            type="action"
-            content="Hello"
-            onClick={handleHelloClick}
-            variant="primary"
-          />
-          <button className="user-profile-button">
-            <PersonIcon />
-          </button>
           {isStreaming && (
             <div className="streaming-indicator">
               <PauseIcon className="pause-icon" />
@@ -45,29 +29,44 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isStreaming = false }
       </div>
       
       <div className="messages-container">
-        {messages.map((message) => (
-          <div 
-            key={message.id} 
-            className={`message ${message.type === 'assistant' ? 'assistant' : 'user'}`}
-          >
-            {message.type === 'assistant' && (
-              <div className="message-avatar">
-                <BotIcon className="ai-robot-icon" />
-              </div>
-            )}
-            
-            <div className="message-content">
-              <div className="message-bubble">
-                <MessageBlock 
-                  type="text"
-                  content={message.text}
-                />
-              </div>
-              <div className="message-timestamp">
-                {message.timestamp.toLocaleTimeString()}
-              </div>
-            </div>
-          </div>
+        {/* Hello message */}
+        <Message
+          type="assistant"
+          text="Hello! How can I help you today?"
+        />
+        
+        {/* Sample user message */}
+        <Message
+          type="user"
+          text="Hi! I need help with my React project. Can you assist me?"
+        />
+        
+        {/* Sample assistant response */}
+        <Message
+          type="assistant"
+          text="Of course! I'd be happy to help you with your React project. What specific issue are you facing?"
+        />
+        
+        {/* Sample user follow-up */}
+        <Message
+          type="user"
+          text="I'm having trouble with state management and component communication. The data isn't flowing properly between components."
+        />
+        
+        {/* Sample assistant detailed response */}
+        <Message
+          type="assistant"
+          text="That's a common challenge in React! There are several approaches we can use: props for parent-child communication, Context API for deeper component trees, or state management libraries like Redux. Which approach would you prefer to explore first?"
+        />
+        
+        {/* User messages from props */}
+        {messages.map((message, index) => (
+          <Message
+            key={message.id}
+            type={message.type}
+            text={message.text}
+            isTyping={isStreaming && index === messages.length - 1}
+          />
         ))}
       </div>
     </div>

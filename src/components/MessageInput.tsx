@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
-import RefreshIcon from '@mui/icons-material/Refresh'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 interface MessageInputProps {
   onSendMessage: (message: string) => void
@@ -43,7 +43,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onReset }) =
               <SendIcon />
             </button>
             <button type="button" onClick={onReset} className="reset-button">
-              <RefreshIcon />
+              <DeleteIcon />
             </button>
           </div>
         </div>
@@ -52,10 +52,6 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onReset }) =
           Appuyez sur Entrée pour envoyer, Maj+Entrée pour une nouvelle ligne
         </div>
       </form>
-      
-      <div className="bottom-left-button">
-        <button className="profile-button">N</button>
-      </div>
     </div>
   )
 }
