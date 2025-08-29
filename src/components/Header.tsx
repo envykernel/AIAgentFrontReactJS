@@ -1,26 +1,34 @@
 import React from 'react'
 import WifiIcon from '@mui/icons-material/Wifi'
 import WifiOffIcon from '@mui/icons-material/WifiOff'
-import TimerOffIcon from '@mui/icons-material/TimerOff'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 
 interface HeaderProps {
-  sessionTime: string
   sessionId: string
-  isConnected?: boolean
 }
 
-const Header: React.FC<HeaderProps> = ({ sessionTime, sessionId, isConnected = true }) => {
-  // Calculer le pourcentage de progression basé sur le temps restant
-  const calculateProgress = () => {
-    const [minutes, seconds] = sessionTime.split(':').map(Number)
-    const totalSeconds = minutes * 60 + seconds
-    const totalSessionSeconds = 2 * 60 // 2 minutes
-    const progress = (totalSeconds / totalSessionSeconds) * 100
-    return Math.max(0, Math.min(100, progress))
-  }
-
-  const progressPercentage = calculateProgress()
+const Header: React.FC<HeaderProps> = ({ sessionId }) => {
+  const [progressPercentage, setProgressPercentage] = React.useState(100)
+  
+  // Calculer la progression en temps réel
+  React.useEffect(() => {
+    const startTime = Date.now()
+    const sessionDuration = 2 * 60 * 1000 // 2 minutes en millisecondes
+    
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - startTime
+      const remaining = Math.max(0, sessionDuration - elapsed)
+      const progress = (remaining / sessionDuration) * 100
+      setProgressPercentage(progress)
+      
+      if (remaining <= 0) {
+        clearInterval(interval)
+        setProgressPercentage(0)
+      }
+    }, 100)
+    
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <header className="header">
@@ -34,15 +42,15 @@ const Header: React.FC<HeaderProps> = ({ sessionTime, sessionId, isConnected = t
       <div className="header-right">
         <div className="status-indicators">
           <div className="status-item">
-            {isConnected ? (
+            {progressPercentage > 0 ? (
               <WifiIcon className="wifi-icon connected" />
             ) : (
               <WifiOffIcon className="wifi-icon disconnected" />
             )}
           </div>
           
-          <div className="session-info">
-            <div className="session-id">
+          <div className={`session-info ${progressPercentage === 0 ? 'session-expired' : ''}`}>
+            <div className={`session-id ${progressPercentage === 0 ? 'session-expired' : ''}`}>
               {sessionId}
             </div>
             <div className="progress-bar-container">
@@ -53,10 +61,7 @@ const Header: React.FC<HeaderProps> = ({ sessionTime, sessionId, isConnected = t
             </div>
           </div>
           
-          <div className="timer">
-            <TimerOffIcon className="clock-icon" />
-            <span>{sessionTime}</span>
-          </div>
+
         </div>
       </div>
     </header>

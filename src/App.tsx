@@ -58,9 +58,11 @@ function App() {
         if (elapsed >= SESSION_DURATION) {
           // Session expirée après exactement 2 minutes
           setIsSessionActive(false)
-          if (timerRef.current) {
-            clearInterval(timerRef.current)
-          }
+          // Continuer à afficher le temps écoulé après expiration
+          const overtimeSeconds = Math.floor((elapsed - SESSION_DURATION) / 1000)
+          const overtimeMinutes = Math.floor(overtimeSeconds / 60)
+          const overtimeSecs = overtimeSeconds % 60
+          setSessionTime(`-${overtimeMinutes}:${overtimeSecs.toString().padStart(2, '0')}`)
         }
       }
     }, 100)
@@ -140,9 +142,7 @@ function App() {
   return (
     <div className="app">
       <Header 
-        sessionTime={sessionTime}
         sessionId={sessionId}
-        isConnected={true}
       />
       <ChatWindow messages={messages} isStreaming={false} />
       {isSessionActive ? (
