@@ -18,7 +18,6 @@ const Header: React.FC<HeaderProps> = ({ sessionTime, sessionId, isConnected = t
           <AutoAwesomeIcon className="sparkles-icon" />
           <h1 className="title">Assistant IA</h1>
         </div>
-        <p className="connection-status">Connecté à http://localhost:5121</p>
       </div>
       
       <div className="header-right">

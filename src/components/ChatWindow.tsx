@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import PauseIcon from '@mui/icons-material/Pause'
 import Message from './Message'
 
@@ -15,6 +15,16 @@ interface ChatWindowProps {
 }
 
 const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isStreaming = false }) => {
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages, isStreaming])
+
   return (
     <div className="chat-window">
       <div className="chat-header">
@@ -68,6 +78,9 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isStreaming = false }
             isTyping={isStreaming && index === messages.length - 1}
           />
         ))}
+        
+        {/* Invisible div for scroll reference */}
+        <div ref={messagesEndRef} />
       </div>
     </div>
   )
