@@ -11,6 +11,17 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ sessionTime, sessionId, isConnected = true }) => {
+  // Calculer le pourcentage de progression basé sur le temps restant
+  const calculateProgress = () => {
+    const [minutes, seconds] = sessionTime.split(':').map(Number)
+    const totalSeconds = minutes * 60 + seconds
+    const totalSessionSeconds = 2 * 60 // 2 minutes
+    const progress = (totalSeconds / totalSessionSeconds) * 100
+    return Math.max(0, Math.min(100, progress))
+  }
+
+  const progressPercentage = calculateProgress()
+
   return (
     <header className="header">
       <div className="header-left">
@@ -30,8 +41,16 @@ const Header: React.FC<HeaderProps> = ({ sessionTime, sessionId, isConnected = t
             )}
           </div>
           
-          <div className="session-id">
-            {sessionId}
+          <div className="session-info">
+            <div className="session-id">
+              {sessionId}
+            </div>
+            <div className="progress-bar-container">
+              <div 
+                className={`progress-bar ${progressPercentage >= 40 ? 'green' : progressPercentage >= 15 ? 'orange' : 'red'}`}
+                style={{ width: `${progressPercentage}%` }}
+              ></div>
+            </div>
           </div>
           
           <div className="timer">
