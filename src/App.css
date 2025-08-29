@@ -49,13 +49,13 @@ body {
 }
 
 .sparkles-icon {
-  color: #003580;
+  color: #059669;
   width: 28px !important;
   height: 28px !important;
 }
 
 .header-left .title {
-  color: #003580;
+  color: #059669;
   font-size: 2rem;
   font-weight: bold;
   margin: 0;
@@ -86,20 +86,20 @@ body {
 .wifi-icon {
   width: 20px !important;
   height: 20px !important;
-  color: #003580;
+  color: #059669;
 }
 
 .wifi-icon.connected {
-  color: #003580;
+  color: #059669;
 }
 
 .wifi-icon.disconnected {
-  color: #003580;
+  color: #059669;
 }
 
 .session-id {
   background: white;
-  border: 2px solid #003580;
+  border: 2px solid #059669;
   border-radius: 20px;
   padding: 0.5rem 1rem;
   font-family: 'Courier New', monospace;
@@ -112,7 +112,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #003580;
+  color: #059669;
   font-weight: 500;
 }
 
@@ -146,7 +146,7 @@ body {
 
 /* MessageBlock Component Styles */
 .message-action-button {
-  background: linear-gradient(135deg, #003580 0%, #0071c2 100%);
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
   color: white;
   border: none;
   border-radius: 25px;
@@ -156,7 +156,7 @@ body {
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: inherit;
-  box-shadow: 0 4px 15px rgba(0, 53, 128, 0.3);
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -177,9 +177,9 @@ body {
 }
 
 .message-action-button:hover {
-  background: linear-gradient(135deg, #0071c2 0%, #005696 100%);
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 53, 128, 0.4);
+  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
 }
 
 .message-action-button.secondary {
@@ -261,7 +261,7 @@ body {
 }
 
 .user-profile-button {
-  background: linear-gradient(135deg, #003580 0%, #0071c2 100%);
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
   color: white;
   border: none;
   border-radius: 50%;
@@ -272,7 +272,7 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba(0, 53, 128, 0.3);
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
 }
 
 .user-profile-button .MuiSvgIcon-root {
@@ -281,22 +281,22 @@ body {
 }
 
 .user-profile-button:hover {
-  background: linear-gradient(135deg, #0071c2 0%, #005696 100%);
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
   transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 8px 25px rgba(0, 53, 128, 0.4);
+  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
 }
 
 .streaming-indicator {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, rgba(0, 53, 128, 0.1) 0%, rgba(0, 53, 128, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%);
   padding: 0.5rem 0.75rem;
   border-radius: 20px;
-  color: #003580;
+  color: #059669;
   font-size: 0.875rem;
   font-weight: 500;
-  border: 1px solid rgba(0, 53, 128, 0.2);
+  border: 1px solid rgba(5, 150, 105, 0.2);
   backdrop-filter: blur(10px);
 }
 
@@ -364,11 +364,11 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #003580 0%, #0071c2 100%);
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(0, 53, 128, 0.3);
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -376,8 +376,8 @@ body {
 
 /* User avatar styling */
 .message.user .avatar-container {
-  background: linear-gradient(135deg, #003580 0%, #0071c2 100%);
-  box-shadow: 0 4px 15px rgba(0, 53, 128, 0.3);
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
 }
 
 .avatar-container::before {
@@ -398,11 +398,11 @@ body {
 
 .message:hover .avatar-container {
   transform: scale(1.1);
-  box-shadow: 0 8px 25px rgba(0, 53, 128, 0.4);
+  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
 }
 
 .message.user:hover .avatar-container {
-  box-shadow: 0 8px 25px rgba(0, 53, 128, 0.4);
+  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
 }
 
 .ai-robot-icon {
@@ -499,16 +499,16 @@ body {
 .message.assistant .message-bubble {
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   color: #000000;
-  border: 1px solid rgba(0, 53, 128, 0.2);
-  box-shadow: 0 4px 20px rgba(0, 53, 128, 0.1);
+  border: 1px solid rgba(5, 150, 105, 0.2);
+  box-shadow: 0 4px 20px rgba(5, 150, 105, 0.1);
   position: relative;
 }
 
 .message.user .message-bubble {
-  background: linear-gradient(135deg, #003580 0%, #0071c2 100%);
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
   color: white;
-  border: 1px solid rgba(0, 53, 128, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 53, 128, 0.15);
+  border: 1px solid rgba(5, 150, 105, 0.3);
+  box-shadow: 0 4px 20px rgba(5, 150, 105, 0.15);
   position: relative;
   overflow: hidden;
 }
@@ -523,14 +523,14 @@ body {
 }
 
 .message.assistant:hover .message-bubble {
-  box-shadow: 0 8px 30px rgba(0, 53, 128, 0.15);
+  box-shadow: 0 8px 30px rgba(5, 150, 105, 0.15);
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
 
 .message.user:hover .message-bubble {
-  box-shadow: 0 8px 30px rgba(0, 53, 128, 0.2);
+  box-shadow: 0 8px 30px rgba(5, 150, 105, 0.2);
   transform: translateY(-2px);
-  background: linear-gradient(135deg, #0071c2 0%, #005696 100%);
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
 }
 
 /* Message Input Styles - Beautiful Modern Design */
@@ -544,8 +544,8 @@ body {
   z-index: 1000;
   height: 90px;
   box-sizing: border-box;
-  border-top: 1px solid rgba(0, 53, 128, 0.08);
-  box-shadow: 0 -4px 20px rgba(0, 53, 128, 0.06);
+  border-top: 1px solid rgba(5, 150, 105, 0.08);
+  box-shadow: 0 -4px 20px rgba(5, 150, 105, 0.06);
 }
 
 .message-form {
@@ -566,15 +566,15 @@ body {
   background: white;
   border-radius: 16px;
   padding: 0.75rem;
-  box-shadow: 0 2px 12px rgba(0, 53, 128, 0.08);
-  border: 1px solid rgba(0, 53, 128, 0.06);
+  box-shadow: 0 2px 12px rgba(5, 150, 105, 0.08);
+  border: 1px solid rgba(5, 150, 105, 0.06);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
 .input-wrapper:focus-within {
-  box-shadow: 0 4px 20px rgba(0, 53, 128, 0.12);
-  border-color: rgba(0, 53, 128, 0.15);
+  box-shadow: 0 4px 20px rgba(5, 150, 105, 0.12);
+  border-color: rgba(5, 150, 105, 0.15);
   transform: translateY(-1px);
 }
 
@@ -608,7 +608,7 @@ body {
 }
 
 .send-button {
-  background: linear-gradient(135deg, #003580 0%, #0071c2 100%);
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
   color: white;
   border: none;
   border-radius: 12px;
@@ -619,7 +619,7 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0, 53, 128, 0.2);
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.2);
   position: relative;
   overflow: hidden;
 }
@@ -640,9 +640,9 @@ body {
 }
 
 .send-button:hover {
-  background: linear-gradient(135deg, #0071c2 0%, #005696 100%);
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(0, 53, 128, 0.3);
+  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.3);
 }
 
 .send-button:active {
@@ -729,12 +729,12 @@ body {
 }
 
 .messages-container::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #003580 0%, #0071c2 100%);
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
   border-radius: 4px;
 }
 
 .messages-container::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #0071c2 0%, #005696 100%);
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
 }
 
 /* Responsive Design */
