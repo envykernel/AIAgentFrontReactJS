@@ -1,115 +1,153 @@
-# Assistant IA - Chatbot Interface
+# AI Agent Frontend ReactJS
 
-A modern, responsive chatbot interface built with React, TypeScript, and Vite. The application features a clean design with a green and white theme, perfect for AI assistant interactions.
+This is a React frontend application that integrates with the MultiAgentsBeta API backend for AI chat functionality.
 
 ## Features
 
-- **Modern UI Design**: Clean, responsive interface with green (#157347) and white color scheme
-- **Real-time Chat**: Interactive chat window with AI assistant and user messages
-- **Status Indicators**: Connection status, session ID, and timer display
-- **Action Buttons**: Quick access buttons for common actions
-- **Responsive Layout**: Works seamlessly on desktop and mobile devices
-- **TypeScript**: Full type safety and modern development experience
+- **Real-time Chat**: Send messages to AI agents and receive responses
+- **Session Management**: Automatic session creation and management
+- **Token Management**: Real-time token usage tracking and statistics
+- **Error Handling**: Comprehensive error handling and user feedback
+- **Loading States**: Visual feedback during API calls
+- **Responsive Design**: Modern, responsive UI design
 
-## Layout Components
+## API Integration
 
-### Header Section
+The application integrates with the MultiAgentsBeta API using the following endpoints:
 
-- **Title**: "Assistant IA" in green text
-- **Connection Status**: Shows connection endpoint (http://localhost:5121)
-- **Status Panel**: WiFi icon, session ID, and session timer
+### Main Chat Endpoint
+- **URL**: `POST /api/agent/chat`
+- **Purpose**: Send chat messages and receive AI responses
+- **Features**:
+  - Automatic session creation for first message
+  - Session continuation for follow-up messages
+  - Token usage tracking
+  - Conversation summarization when token limits are approached
 
-### Chat Window
+### Testing Endpoints
+- **Health Check**: `GET /api/test/health`
+- **CORS Test**: `GET /api/test/cors`
 
-- **Message Display**: Chat bubbles with AI robot icons and user messages
-- **Action Buttons**: "hello" button and user profile button
-- **Message History**: Scrollable conversation history
+## How It Works
 
-### Message Input
+### Initial Message Flow
+1. User sends first message
+2. App calls `/api/agent/chat` with empty `sessionId`
+3. Backend creates new session and returns `sessionId`
+4. App stores `sessionId` for future messages
+5. AI response is displayed to user
 
-- **Text Input**: Multi-line textarea with placeholder text
-- **Send Button**: Paper plane icon for sending messages
-- **Reset Button**: Blue outlined button to reset conversation
-- **Helper Text**: Instructions for keyboard shortcuts
-- **Profile Button**: Bottom-left circular button with "N"
+### Follow-up Message Flow
+1. User sends additional message
+2. App calls `/api/agent/chat` with existing `sessionId`
+3. Backend continues conversation in same session
+4. AI response is displayed to user
 
-## Keyboard Shortcuts
+### Session Management
+- Sessions are automatically created on first message
+- Session ID is stored and reused for conversation continuity
+- Sessions can be reset by clicking the reset button
+- New conversations start fresh sessions
 
-- **Enter**: Send message
-- **Shift + Enter**: New line in message
-
-## Getting Started
+## Development
 
 ### Prerequisites
-
-- Node.js (version 16 or higher)
+- Node.js (v18 or higher)
 - npm or yarn
 
 ### Installation
+```bash
+npm install
+```
 
-1. Clone the repository or navigate to the project directory
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-### Development
-
-Start the development server:
-
+### Development Server
 ```bash
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
-
-### Building for Production
-
-Create a production build:
-
+### Build for Production
 ```bash
 npm run build
 ```
 
-The built files will be in the `dist/` directory.
+### API Configuration
+The API base URL is configured in `src/services/api.ts`:
+```typescript
+const API_BASE_URL = 'http://localhost:5107'; // Development server
+```
 
-## Project Structure
+## File Structure
 
 ```
 src/
 ├── components/
-│   ├── Header.tsx          # Header with title and status indicators
 │   ├── ChatWindow.tsx      # Main chat interface
-│   └── MessageInput.tsx    # Message input and controls
-├── App.tsx                 # Main application component
-├── App.css                 # Application styles
-├── main.tsx               # Application entry point
-└── index.css              # Global styles
+│   ├── Header.tsx         # Header with session info
+│   ├── LoadingIndicator.tsx # Loading state component
+│   ├── Message.tsx        # Individual message component
+│   ├── MessageBlock.tsx   # Message block component
+│   └── MessageInput.tsx   # Message input component
+├── services/
+│   └── api.ts            # API service layer
+├── utils/
+│   └── apiTest.ts        # API testing utilities
+├── App.tsx               # Main application component
+└── main.tsx              # Application entry point
 ```
 
-## Technologies Used
+## API Response Format
 
-- **React 18**: Modern React with hooks
-- **TypeScript**: Type-safe JavaScript
-- **Vite**: Fast build tool and dev server
-- **CSS3**: Modern styling with flexbox and CSS Grid
-- **ESLint**: Code quality and consistency
+The chat API returns responses in the following format:
 
-## Customization
+```typescript
+interface ChatResponse {
+  sessionId: string;           // Unique session identifier
+  message: string;             // AI response text
+  role: 'assistant';          // Message role (always 'assistant')
+  timestamp: string;          // Response timestamp
+  tokenCount: number;         // Tokens in current response
+  isNewSession: boolean;      // Whether this is a new session
+  totalMessageCount: number;  // Total messages in session
+  totalTokenCount: number;    // Total tokens used
+  maxTokens: number;         // Maximum allowed tokens
+  remainingTokens: number;   // Remaining tokens
+  tokenUsagePercentage: number; // Usage percentage
+}
+```
 
-The application can be easily customized by modifying:
+## Error Handling
 
-- Color scheme in `src/App.css`
-- Component behavior in individual component files
-- Message handling logic in `src/App.tsx`
+The application handles various error scenarios:
 
-## Browser Support
+- **Network Errors**: Displayed to user with retry options
+- **API Errors**: Error messages from backend are shown
+- **Session Errors**: Automatic session reset on invalid sessions
+- **Loading States**: Visual feedback during API calls
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+## Testing
+
+To test the API integration, you can use the browser console:
+
+```javascript
+// Import and run the test function
+import { testApiConnection } from './utils/apiTest';
+testApiConnection();
+```
+
+Or run it directly in the browser console if the function is available globally.
+
+## Environment Configuration
+
+The application is configured for development by default. For production, update the API base URL in `src/services/api.ts`.
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## License
 
-This project is open source and available under the MIT License.
+This project is licensed under the MIT License.

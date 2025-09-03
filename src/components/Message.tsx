@@ -5,13 +5,13 @@ import PersonIcon from '@mui/icons-material/Person'
 interface MessageProps {
   type: 'assistant' | 'user'
   text: string
-  isTyping?: boolean
+  isThinking?: boolean
 }
 
 const Message: React.FC<MessageProps> = ({ 
   type, 
   text, 
-  isTyping = false 
+  isThinking = false
 }) => {
   const isUser = type === 'user'
   
@@ -28,15 +28,15 @@ const Message: React.FC<MessageProps> = ({
       </div>
       
       <div className="message-content">
-        <div className="message-bubble">
+        <div className={`message-bubble ${isThinking ? 'thinking' : ''}`}>
           <div className="message-text">
             {text}
-            {isTyping && (
-              <div className="typing-indicator">
-                <span className="dot"></span>
-                <span className="dot"></span>
-                <span className="dot"></span>
-              </div>
+            {isThinking && (
+              <span className="thinking-dots">
+                <span className="thinking-dot">.</span>
+                <span className="thinking-dot">.</span>
+                <span className="thinking-dot">.</span>
+              </span>
             )}
           </div>
         </div>

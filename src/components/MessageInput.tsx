@@ -1,28 +1,36 @@
 import React, { useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
 import DeleteIcon from '@mui/icons-material/Delete'
+import HelpIcon from '@mui/icons-material/Help'
+import QuickQuestionsModal from './QuickQuestionsModal'
 
 interface MessageInputProps {
   onSendMessage: (message: string) => void
   onReset: () => void
+  disabled?: boolean
 }
 
-const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onReset }) => {
+const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onReset, disabled = false }) => {
   const [message, setMessage] = useState('')
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (message.trim()) {
+    if (message.trim() && !disabled) {
       onSendMessage(message)
       setMessage('')
     }
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey && !disabled) {
       e.preventDefault()
       handleSubmit(e as React.FormEvent)
     }
+  }
+
+  const handleQuestionSelect = (question: string) => {
+    onSendMessage(question)
   }
 
   return (
@@ -33,25 +41,41 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onReset }) =
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Tapez votre message ici…"
+            placeholder="Type your message here..."
             className="message-input"
             rows={1}
+            disabled={disabled}
           />
           
           <div className="input-actions">
-            <button type="submit" className="send-button">
+            <button 
+              type="button" 
+              className="quick-questions-button" 
+              onClick={() => setIsModalOpen(true)}
+              disabled={disabled}
+              title="Quick Questions"
+            >
+              <HelpIcon />
+            </button>
+            <button type="submit" className="send-button" disabled={disabled}>
               <SendIcon />
             </button>
-            <button type="button" onClick={onReset} className="reset-button">
+            <button type="button" onClick={onReset} className="reset-button" disabled={disabled}>
               <DeleteIcon />
             </button>
           </div>
         </div>
         
         <div className="helper-text">
-          Appuyez sur Entrée pour envoyer, Maj+Entrée pour une nouvelle ligne
+          Press Enter to send, Shift+Enter for a new line
         </div>
       </form>
+      
+      <QuickQuestionsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSelectQuestion={handleQuestionSelect}
+      />
     </div>
   )
 }
