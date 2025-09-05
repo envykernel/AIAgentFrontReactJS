@@ -2,8 +2,14 @@ import React from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import TokenIcon from '@mui/icons-material/Token'
 import TrendingUpIcon from '@mui/icons-material/TrendingUp'
-import SpeedIcon from '@mui/icons-material/Speed'
-import { type TokenUsage } from './TokenUsageWidget'
+import { config } from '../config'
+
+export interface TokenUsage {
+  maxTokens: number
+  totalTokenCount: number
+  remainingTokens: number
+  tokenUsagePercentage: number
+}
 
 interface TokenUsageModalProps {
   isOpen: boolean
@@ -15,21 +21,13 @@ const TokenUsageModal: React.FC<TokenUsageModalProps> = ({ isOpen, onClose, toke
   if (!isOpen || !tokenUsage) return null
 
   const getUsageColor = (percentage: number) => {
-    if (percentage >= 90) return '#ef4444' // Red
-    if (percentage >= 75) return '#f59e0b' // Orange
-    if (percentage >= 50) return '#3b82f6' // Blue
-    return '#10b981' // Green
-  }
-
-  const getUsageStatus = (percentage: number) => {
-    if (percentage >= 90) return 'Critical'
-    if (percentage >= 75) return 'High'
-    if (percentage >= 50) return 'Moderate'
-    return 'Low'
+    if (percentage >= 90) return config.THEME_COLORS.error
+    if (percentage >= 75) return config.THEME_COLORS.warning
+    if (percentage >= 50) return config.THEME_COLORS.primary
+    return config.THEME_COLORS.success
   }
 
   const usageColor = getUsageColor(tokenUsage.tokenUsagePercentage)
-  const status = getUsageStatus(tokenUsage.tokenUsagePercentage)
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -47,16 +45,6 @@ const TokenUsageModal: React.FC<TokenUsageModalProps> = ({ isOpen, onClose, toke
         
         {/* Main Content */}
         <div className="mini-content">
-          {/* Status & Percentage */}
-          <div className="mini-status-row">
-            <div className="mini-status-badge" style={{ backgroundColor: usageColor }}>
-              {status}
-            </div>
-            <div className="mini-percentage" style={{ color: usageColor }}>
-              {tokenUsage.tokenUsagePercentage.toFixed(1)}%
-            </div>
-          </div>
-
           {/* Compact Stats */}
           <div className="mini-stats">
             <div className="mini-stat">
@@ -85,7 +73,7 @@ const TokenUsageModal: React.FC<TokenUsageModalProps> = ({ isOpen, onClose, toke
                   cy="40"
                   r="30"
                   fill="none"
-                  stroke="#f3f4f6"
+                  stroke={config.THEME_COLORS.border}
                   strokeWidth="6"
                 />
                 <circle

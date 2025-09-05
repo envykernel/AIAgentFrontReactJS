@@ -1,3 +1,20 @@
+/* CSS Custom Properties for Theme Colors */
+:root {
+  --color-primary: #6366f1;
+  --color-primary-hover: #5b21b6;
+  --color-primary-light: #8b5cf6;
+  --color-primary-dark: #4f46e5;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-background: #f8f9ff;
+  --color-surface: #ffffff;
+  --color-text: #1f2937;
+  --color-text-secondary: #6b7280;
+  --color-border: rgba(99, 102, 241, 0.1);
+  --color-shadow: rgba(99, 102, 241, 0.15);
+}
+
 /* Reset and base styles */
 * {
   margin: 0;
@@ -17,20 +34,20 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: var(--color-background);
   overflow: hidden;
   padding: 0 1rem 0.5rem 1rem;
 }
 
 /* Header Styles */
 .header {
-  background: white;
+  background: var(--color-surface);
   padding: 1rem 2rem;
-  border-bottom: 2px solid #e9ecef;
+  border-bottom: 2px solid var(--color-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px var(--color-shadow);
   position: fixed;
   top: 0;
   left: 0;
@@ -41,6 +58,26 @@ body {
   border-radius: 0;
 }
 
+.header-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .title-container {
   display: flex;
   align-items: center;
@@ -49,13 +86,13 @@ body {
 }
 
 .sparkles-icon {
-  color: #059669;
+  color: var(--color-primary);
   width: 28px !important;
   height: 28px !important;
 }
 
 .header-left .title {
-  color: #059669;
+  color: var(--color-primary);
   font-size: 2rem;
   font-weight: bold;
   margin: 0;
@@ -67,9 +104,35 @@ body {
   margin: 0;
 }
 
-.header-right {
+/* Token Usage Button in Header */
+.token-usage-button-header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--color-shadow);
+  color: white;
+}
+
+.token-usage-button-header:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--color-shadow);
+  background: linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-primary-dark) 100%);
+}
+
+.token-usage-button-header:active {
+  transform: translateY(0);
+}
+
+.token-usage-button-header svg {
+  width: 24px;
+  height: 24px;
 }
 
 .status-indicators {
@@ -92,7 +155,7 @@ body {
 }
 
 .wifi-icon.connected {
-  color: #059669;
+  color: var(--color-primary);
 }
 
 .wifi-icon.disconnected {
@@ -253,27 +316,27 @@ body {
 }
 
 .session-id {
-  background: white;
-  border: 2px solid #059669;
+  background: var(--color-surface);
+  border: 2px solid var(--color-primary);
   border-radius: 20px;
   padding: 0.5rem 1rem;
   font-family: 'Courier New', monospace;
   font-size: 0.875rem;
-  color: #000000;
+  color: var(--color-primary);
   font-weight: 500;
   transition: all 0.3s ease;
 }
 
 .session-id.session-expired {
-  background: #f3f4f6;
-  border-color: #9ca3af;
-  color: #6b7280;
+  background: var(--color-surface);
+  border-color: var(--color-text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .progress-bar-container {
   width: 80%;
   height: 6px;
-  background: rgba(5, 150, 105, 0.1);
+  background: var(--color-border);
   border-radius: 3px;
   overflow: hidden;
   position: relative;
@@ -288,15 +351,15 @@ body {
 }
 
 .progress-bar.green {
-  background: linear-gradient(90deg, #059669 0%, #10b981 100%);
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
 }
 
 .progress-bar.orange {
-  background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+  background: linear-gradient(90deg, var(--color-warning) 0%, #fbbf24 100%);
 }
 
 .progress-bar.red {
-  background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
+  background: linear-gradient(90deg, var(--color-error) 0%, #dc2626 100%);
 }
 
 .progress-bar::after {
@@ -370,7 +433,7 @@ body {
 
 /* MessageBlock Component Styles */
 .message-action-button {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
   color: white;
   border: none;
   border-radius: 25px;
@@ -401,9 +464,9 @@ body {
 }
 
 .message-action-button:hover {
-  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  background: linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-primary-dark) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+  box-shadow: 0 8px 25px var(--color-shadow);
 }
 
 .message-action-button.secondary {
@@ -630,11 +693,11 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+  box-shadow: 0 4px 15px var(--color-shadow);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -642,8 +705,8 @@ body {
 
 /* User avatar styling */
 .message.user .avatar-container {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  box-shadow: 0 4px 15px var(--color-shadow);
 }
 
 .avatar-container::before {
@@ -664,11 +727,11 @@ body {
 
 .message:hover .avatar-container {
   transform: scale(1.1);
-  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+  box-shadow: 0 8px 25px var(--color-shadow);
 }
 
 .message.user:hover .avatar-container {
-  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+  box-shadow: 0 8px 25px var(--color-shadow);
 }
 
 .ai-robot-icon {
@@ -710,11 +773,11 @@ body {
 
 
 .message-bubble {
-  background: white;
+  background: var(--color-surface);
   padding: 1rem 1.25rem;
   border-radius: 18px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 20px var(--color-shadow);
+  border: 1px solid var(--color-border);
   line-height: 1.5;
   word-wrap: break-word;
   min-height: 45px;
@@ -796,10 +859,10 @@ body {
 }
 
 .message.user .message-bubble {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
   color: white;
-  border: 1px solid rgba(5, 150, 105, 0.3);
-  box-shadow: 0 4px 20px rgba(5, 150, 105, 0.15);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 20px var(--color-shadow);
   position: relative;
   overflow: hidden;
 }
@@ -814,19 +877,19 @@ body {
 }
 
 .message.assistant:hover .message-bubble {
-  box-shadow: 0 8px 30px rgba(5, 150, 105, 0.15);
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  box-shadow: 0 8px 30px var(--color-shadow);
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-background) 100%);
 }
 
 .message.user:hover .message-bubble {
-  box-shadow: 0 8px 30px rgba(5, 150, 105, 0.2);
+  box-shadow: 0 8px 30px var(--color-shadow);
   transform: translateY(-2px);
-  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  background: linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-primary-dark) 100%);
 }
 
 /* Message Input Styles - Beautiful Modern Design */
 .message-input-container {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-background) 100%);
   padding: 1.5rem 2rem;
   position: fixed;
   bottom: 0.5rem;
@@ -900,7 +963,7 @@ body {
 }
 
 .send-button {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
   color: white;
   border: none;
   border-radius: 12px;
@@ -911,7 +974,7 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.2);
+  box-shadow: 0 2px 8px var(--color-shadow);
   position: relative;
   overflow: hidden;
 }
@@ -932,9 +995,9 @@ body {
 }
 
 .send-button:hover {
-  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  background: linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-primary-dark) 100%);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.3);
+  box-shadow: 0 4px 16px var(--color-shadow);
 }
 
 .send-button:active {
@@ -1289,7 +1352,7 @@ body {
 }
 
 .new-conversation-button {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -1305,13 +1368,47 @@ body {
 }
 
 .new-conversation-button:hover {
-  background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+  background: linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-primary-dark) 100%);
   transform: translateY(-1px);
 }
 
-.new-conversation-button .MuiSvgIcon-root {
-  width: 18px !important;
-  height: 18px !important;
+/* Token Button Container - Standalone */
+.token-button-container {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+.token-usage-button-standalone {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+.token-usage-button-standalone:hover {
+  background: linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-primary-dark) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--color-shadow);
+}
+
+.token-usage-button-standalone:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px var(--color-shadow);
+}
+
+.token-usage-button-standalone .MuiSvgIcon-root {
+  width: 20px !important;
+  height: 20px !important;
 }
 
 .message-input:disabled {
@@ -1807,6 +1904,21 @@ body {
     padding: 0.625rem 1.25rem;
     font-size: 0.8rem;
   }
+  
+  .token-button-container {
+    bottom: 0.75rem;
+    right: 0.75rem;
+  }
+  
+  .token-usage-button-standalone {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .token-usage-button-standalone .MuiSvgIcon-root {
+    width: 18px !important;
+    height: 18px !important;
+  }
 }
 
 /* Ultra Compact Token Modal */
@@ -1814,8 +1926,11 @@ body {
   max-width: 320px;
   width: 85%;
   max-height: 60vh;
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-background) 100%);
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 20px 40px var(--color-shadow);
+  border: 1px solid var(--color-border);
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -1824,8 +1939,8 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 1rem;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-bottom: 1px solid #e5e7eb;
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-background) 100%);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .mini-title {
@@ -1834,19 +1949,19 @@ body {
   gap: 0.5rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #1f2937;
+  color: var(--color-text);
 }
 
 .mini-icon {
   width: 16px !important;
   height: 16px !important;
-  color: #059669;
+  color: var(--color-primary);
 }
 
 .mini-close {
   background: none;
   border: none;
-  color: #6b7280;
+  color: var(--color-primary);
   cursor: pointer;
   padding: 0.25rem;
   border-radius: 4px;
@@ -1857,8 +1972,8 @@ body {
 }
 
 .mini-close:hover {
-  background: #f3f4f6;
-  color: #374151;
+  background: var(--color-border);
+  color: var(--color-primary-hover);
 }
 
 .mini-close .MuiSvgIcon-root {
@@ -1871,28 +1986,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-}
-
-.mini-status-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.mini-status-badge {
-  padding: 0.25rem 0.5rem;
-  border-radius: 12px;
-  color: white;
-  font-size: 0.625rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-
-.mini-percentage {
-  font-size: 1.25rem;
-  font-weight: 700;
-  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
 }
 
 
@@ -1909,35 +2002,35 @@ body {
   gap: 0.25rem;
   flex: 1;
   padding: 0.5rem;
-  background: #f8f9fa;
+  background: var(--color-surface);
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-border);
 }
 
 .mini-stat-icon {
   width: 14px !important;
   height: 14px !important;
-  color: #059669;
+  color: var(--color-primary);
 }
 
 .mini-stat-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+  background: linear-gradient(135deg, var(--color-border), var(--color-text-secondary));
 }
 
 .mini-stat-value {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--color-text);
   font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
   line-height: 1;
 }
 
 .mini-stat-label {
   font-size: 0.625rem;
-  color: #6b7280;
+  color: var(--color-text-secondary);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.2px;
@@ -1948,9 +2041,9 @@ body {
   display: flex;
   justify-content: center;
   padding: 0.5rem;
-  background: #f8f9fa;
+  background: var(--color-surface);
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-border);
 }
 
 .mini-chart {
@@ -1964,6 +2057,6 @@ body {
 .mini-chart-text {
   font-size: 0.875rem;
   font-weight: 700;
-  fill: #1f2937;
+  fill: var(--color-text);
   font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
 }

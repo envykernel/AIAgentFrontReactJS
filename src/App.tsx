@@ -6,7 +6,9 @@ import MessageInput from './components/MessageInput'
 import WifiOffIcon from '@mui/icons-material/WifiOff'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import { apiService, type ChatResponse } from './services/api'
-import { type TokenUsage } from './components/TokenUsageWidget'
+import { type TokenUsage } from './components/TokenUsageModal'
+import { config } from './config'
+import { applyThemeColors } from './utils/theme'
 
 interface Message {
   id: number
@@ -26,11 +28,16 @@ function App() {
   const [tokenUsage, setTokenUsage] = useState<TokenUsage | null>(null)
   const [isConnecting, setIsConnecting] = useState(false)
 
+  // Apply theme colors on app startup
+  React.useEffect(() => {
+    applyThemeColors()
+  }, [])
+
   // Session timeout effect - 2 minutes of inactivity
   React.useEffect(() => {
     if (!lastMessageTime || !isSessionActive) return
 
-    const timeoutDuration = 2 * 60 * 1000 // 2 minutes in milliseconds
+    const timeoutDuration = config.SESSION_DURATION
     const timeoutId = setTimeout(() => {
       setIsSessionActive(false)
     }, timeoutDuration)
@@ -154,6 +161,7 @@ function App() {
         sessionId={currentSessionId || ''}
         lastMessageTime={lastMessageTime}
         isConnecting={isConnecting}
+        tokenUsage={tokenUsage}
       />
       <ChatWindow messages={messages} isStreaming={isLoading} />
       {error && (
@@ -179,7 +187,7 @@ function App() {
             </div>
             <div className="session-timeout-text">
               <h3>Session Timed Out</h3>
-              <p>Your session has expired after 2 minutes of inactivity. Start a new conversation to continue.</p>
+              <p>Your session has expired after {Math.round(config.SESSION_DURATION / 60000)} minutes of inactivity. Start a new conversation to continue.</p>
             </div>
             <button 
               className="new-conversation-button"

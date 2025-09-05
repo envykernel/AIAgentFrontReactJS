@@ -2,23 +2,28 @@ import React from 'react'
 import WifiIcon from '@mui/icons-material/Wifi'
 import WifiOffIcon from '@mui/icons-material/WifiOff'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import TokenIcon from '@mui/icons-material/Token'
+import { config } from '../config'
+import TokenUsageModal, { type TokenUsage } from './TokenUsageModal'
 
 interface HeaderProps {
   sessionId: string
   lastMessageTime?: Date
   isConnecting?: boolean
+  tokenUsage?: TokenUsage | null
 }
 
-const Header: React.FC<HeaderProps> = ({ sessionId, lastMessageTime, isConnecting = false }) => {
+const Header: React.FC<HeaderProps> = ({ sessionId, lastMessageTime, isConnecting = false, tokenUsage }) => {
   const [progressPercentage, setProgressPercentage] = React.useState(100)
   const [isSessionStarted, setIsSessionStarted] = React.useState(false)
+  const [isTokenModalOpen, setIsTokenModalOpen] = React.useState(false)
   
   // Démarrer la progression seulement quand on a un vrai sessionId (pas vide)
   React.useEffect(() => {
     if (sessionId && sessionId.trim() !== '') {
       setIsSessionStarted(true)
       const startTime = lastMessageTime ? lastMessageTime.getTime() : Date.now()
-      const sessionDuration = 2 * 60 * 1000 // 2 minutes en millisecondes
+      const sessionDuration = config.SESSION_DURATION
       
       const interval = setInterval(() => {
         const elapsed = Date.now() - startTime
@@ -46,6 +51,19 @@ const Header: React.FC<HeaderProps> = ({ sessionId, lastMessageTime, isConnectin
           <AutoAwesomeIcon className="sparkles-icon" />
           <h1 className="title">AI Assistant</h1>
         </div>
+      </div>
+      
+      <div className="header-center">
+        {tokenUsage && (
+          <button
+            type="button"
+            className="token-usage-button-header"
+            onClick={() => setIsTokenModalOpen(true)}
+            title="Token Usage Details"
+          >
+            <TokenIcon />
+          </button>
+        )}
       </div>
       
       <div className="header-right">
@@ -76,6 +94,14 @@ const Header: React.FC<HeaderProps> = ({ sessionId, lastMessageTime, isConnectin
           
         </div>
       </div>
+
+      {tokenUsage && (
+        <TokenUsageModal
+          isOpen={isTokenModalOpen}
+          onClose={() => setIsTokenModalOpen(false)}
+          tokenUsage={tokenUsage}
+        />
+      )}
     </header>
   )
 }
