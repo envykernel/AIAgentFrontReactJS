@@ -57,17 +57,6 @@ const TokenUsageModal: React.FC<TokenUsageModalProps> = ({ isOpen, onClose, toke
             </div>
           </div>
 
-          {/* Progress Bar */}
-          <div className="mini-progress">
-            <div 
-              className="mini-progress-fill"
-              style={{ 
-                width: `${tokenUsage.tokenUsagePercentage}%`,
-                backgroundColor: usageColor
-              }}
-            ></div>
-          </div>
-
           {/* Compact Stats */}
           <div className="mini-stats">
             <div className="mini-stat">

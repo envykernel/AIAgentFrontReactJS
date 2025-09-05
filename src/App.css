@@ -1761,6 +1761,7 @@ body {
   max-height: 60vh;
   border-radius: 12px;
   overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .mini-header {
@@ -1836,40 +1837,9 @@ body {
 .mini-percentage {
   font-size: 1.25rem;
   font-weight: 700;
-  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
 }
 
-.mini-progress {
-  width: 100%;
-  height: 4px;
-  background: #f3f4f6;
-  border-radius: 2px;
-  overflow: hidden;
-  position: relative;
-}
-
-.mini-progress-fill {
-  height: 100%;
-  border-radius: 2px;
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-}
-
-.mini-progress-fill::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  animation: mini-shimmer 1.5s infinite;
-}
-
-@keyframes mini-shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
 
 .mini-stats {
   display: flex;
@@ -1906,7 +1876,7 @@ body {
   font-size: 0.75rem;
   font-weight: 700;
   color: #1f2937;
-  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
   line-height: 1;
 }
 
@@ -1940,5 +1910,5 @@ body {
   font-size: 0.875rem;
   font-weight: 700;
   fill: #1f2937;
-  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
 }
