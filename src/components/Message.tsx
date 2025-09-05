@@ -1,6 +1,7 @@
 import React from 'react'
 import BotIcon from '@mui/icons-material/SmartToy'
 import PersonIcon from '@mui/icons-material/Person'
+import ReactMarkdown from 'react-markdown'
 
 interface MessageProps {
   type: 'assistant' | 'user'
@@ -30,7 +31,11 @@ const Message: React.FC<MessageProps> = ({
       <div className="message-content">
         <div className={`message-bubble ${isThinking ? 'thinking' : ''}`}>
           <div className="message-text">
-            {text}
+            {isUser ? (
+              text
+            ) : (
+              <ReactMarkdown>{text}</ReactMarkdown>
+            )}
             {isThinking && (
               <span className="thinking-dots">
                 <span className="thinking-dot">.</span>
