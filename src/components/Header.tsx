@@ -70,6 +70,7 @@ const Header: React.FC<HeaderProps> = ({ sessionId, lastMessageTime }) => {
               </div>
             </div>
           )}
+          
         </div>
       </div>
     </header>

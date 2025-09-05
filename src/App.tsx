@@ -6,6 +6,7 @@ import MessageInput from './components/MessageInput'
 import WifiOffIcon from '@mui/icons-material/WifiOff'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import { apiService, type ChatResponse } from './services/api'
+import { type TokenUsage } from './components/TokenUsageWidget'
 
 interface Message {
   id: number
@@ -22,6 +23,7 @@ function App() {
   const [error, setError] = useState<string | null>(null)
   const [isSessionActive, setIsSessionActive] = useState(true) // Session active par défaut
   const [lastMessageTime, setLastMessageTime] = useState<Date | undefined>(undefined)
+  const [tokenUsage, setTokenUsage] = useState<TokenUsage | null>(null)
 
   const handleSendMessage = async (message: string) => {
     if (message.trim() && !isLoading) {
@@ -63,6 +65,14 @@ function App() {
           setCurrentSessionId(response.sessionId)
         }
 
+        // Update token usage data
+        setTokenUsage({
+          maxTokens: response.maxTokens,
+          totalTokenCount: response.totalTokenCount,
+          remainingTokens: response.remainingTokens,
+          tokenUsagePercentage: response.tokenUsagePercentage
+        })
+
         const assistantMessage: Message = {
           id: messages.length + 3,
           type: 'assistant',
@@ -102,6 +112,7 @@ function App() {
     setCurrentSessionId(null)
     setError(null)
     setIsSessionActive(true)
+    setTokenUsage(null)
   }
 
   const handleNewConversation = () => {
@@ -109,6 +120,7 @@ function App() {
     setCurrentSessionId(null)
     setError(null)
     setIsSessionActive(true)
+    setTokenUsage(null)
   }
 
   return (
@@ -131,6 +143,7 @@ function App() {
           onSendMessage={handleSendMessage}
           onReset={handleReset}
           disabled={isLoading}
+          tokenUsage={tokenUsage}
         />
       ) : (
         <div className="session-footer">
