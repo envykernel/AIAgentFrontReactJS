@@ -6,9 +6,10 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 interface HeaderProps {
   sessionId: string
   lastMessageTime?: Date
+  isConnecting?: boolean
 }
 
-const Header: React.FC<HeaderProps> = ({ sessionId, lastMessageTime }) => {
+const Header: React.FC<HeaderProps> = ({ sessionId, lastMessageTime, isConnecting = false }) => {
   const [progressPercentage, setProgressPercentage] = React.useState(100)
   const [isSessionStarted, setIsSessionStarted] = React.useState(false)
   
@@ -50,7 +51,9 @@ const Header: React.FC<HeaderProps> = ({ sessionId, lastMessageTime }) => {
       <div className="header-right">
         <div className="status-indicators">
           <div className="status-item">
-            {isSessionStarted ? (
+            {isConnecting ? (
+              <WifiIcon className="wifi-icon connecting" />
+            ) : isSessionStarted ? (
               <WifiIcon className="wifi-icon connected" />
             ) : (
               <WifiOffIcon className="wifi-icon disconnected" />

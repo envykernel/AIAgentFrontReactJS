@@ -100,6 +100,26 @@ body {
   opacity: 0.7;
 }
 
+.wifi-icon.connecting {
+  color: #6b7280;
+  animation: wifi-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes wifi-pulse {
+  0% {
+    color: #6b7280;
+    opacity: 0.6;
+  }
+  50% {
+    color: #10b981;
+    opacity: 1;
+  }
+  100% {
+    color: #6b7280;
+    opacity: 0.6;
+  }
+}
+
 /* Compact Inline Token Usage Widget */
 .token-usage-inline {
   position: fixed;
@@ -1205,8 +1225,8 @@ body {
   padding: 0;
 }
 
-/* Session Footer - Session fermée */
-.session-footer {
+/* Session Timeout Footer */
+.session-timeout-footer {
   background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
   padding: 1rem 2rem;
   position: fixed;
@@ -1215,78 +1235,78 @@ body {
   right: 1rem;
   z-index: 1000;
   border-radius: 16px;
-  box-shadow: 0 -4px 20px rgba(5, 150, 105, 0.06);
-  border: 1px solid rgba(5, 150, 105, 0.08);
+  box-shadow: 0 -4px 20px rgba(107, 114, 128, 0.08);
+  border: 1px solid rgba(107, 114, 128, 0.12);
   height: 80px;
   display: flex;
   align-items: center;
 }
 
-.session-closed-message {
+.session-timeout-message {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
-.session-closed-icon {
+.session-timeout-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #6b7280;
   margin-right: 0.25rem;
+  border: 1px solid rgba(107, 114, 128, 0.2);
 }
 
-.session-closed-icon .MuiSvgIcon-root {
+.session-timeout-icon .MuiSvgIcon-root {
   width: 24px !important;
   height: 24px !important;
 }
 
-.session-closed-text {
+.session-timeout-text {
   text-align: left;
+  flex: 1;
 }
 
-.session-closed-text h3 {
+.session-timeout-text h3 {
   color: #374151;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 600;
   margin: 0;
 }
 
-.session-closed-text p {
+.session-timeout-text p {
   color: #6b7280;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   margin: 0;
   line-height: 1.3;
 }
 
 .new-conversation-button {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 0.75rem 1.5rem;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
   margin-left: auto;
 }
 
 .new-conversation-button:hover {
-  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+  background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+  transform: translateY(-1px);
 }
 
 .new-conversation-button .MuiSvgIcon-root {
@@ -1751,6 +1771,41 @@ body {
   .message-bubble {
     padding: 1rem 1.25rem;
     border-radius: 20px;
+  }
+  
+  .session-timeout-footer {
+    padding: 0.75rem 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    height: 60px;
+  }
+  
+  .session-timeout-message {
+    gap: 0.75rem;
+  }
+  
+  .session-timeout-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .session-timeout-icon .MuiSvgIcon-root {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  
+  .session-timeout-text h3 {
+    font-size: 0.9rem;
+  }
+  
+  .session-timeout-text p {
+    font-size: 0.75rem;
+  }
+  
+  .new-conversation-button {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8rem;
   }
 }
 

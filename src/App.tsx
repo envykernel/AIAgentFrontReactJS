@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import Header from './components/Header'
 import ChatWindow from './components/ChatWindow'
@@ -24,6 +24,19 @@ function App() {
   const [isSessionActive, setIsSessionActive] = useState(true) // Session active par défaut
   const [lastMessageTime, setLastMessageTime] = useState<Date | undefined>(undefined)
   const [tokenUsage, setTokenUsage] = useState<TokenUsage | null>(null)
+  const [isConnecting, setIsConnecting] = useState(false)
+
+  // Session timeout effect - 2 minutes of inactivity
+  React.useEffect(() => {
+    if (!lastMessageTime || !isSessionActive) return
+
+    const timeoutDuration = 2 * 60 * 1000 // 2 minutes in milliseconds
+    const timeoutId = setTimeout(() => {
+      setIsSessionActive(false)
+    }, timeoutDuration)
+
+    return () => clearTimeout(timeoutId)
+  }, [lastMessageTime, isSessionActive])
 
   const handleSendMessage = async (message: string) => {
     if (message.trim() && !isLoading) {
@@ -37,8 +50,9 @@ function App() {
       // Ajouter le message de l'utilisateur
       setMessages(prev => [...prev, userMessage])
       
-      // Mettre à jour le timestamp du dernier message
+      // Mettre à jour le timestamp du dernier message et réactiver la session
       setLastMessageTime(new Date())
+      setIsSessionActive(true)
       
       // Ajouter un message temporaire de l'assistant
       const tempAssistantMessage: Message = {
@@ -52,6 +66,11 @@ function App() {
       setMessages(prev => [...prev, tempAssistantMessage])
       setIsLoading(true)
       setError(null)
+      
+      // Set connecting state if this is the first message (no session ID yet)
+      if (!currentSessionId) {
+        setIsConnecting(true)
+      }
 
       try {
         // Call the API with the current session ID (or empty for new session)
@@ -63,6 +82,7 @@ function App() {
         // Update session ID if this is a new session
         if (response.isNewSession) {
           setCurrentSessionId(response.sessionId)
+          setIsConnecting(false) // Clear connecting state when session is established
         }
 
         // Update token usage data
@@ -88,6 +108,7 @@ function App() {
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'An error occurred while communicating with the assistant.'
         setError(errorMessage)
+        setIsConnecting(false) // Clear connecting state on error
         
         // Remplacer le message temporaire par le message d'erreur
         const errorMsg: Message = {
@@ -103,6 +124,7 @@ function App() {
         })
       } finally {
         setIsLoading(false)
+        setIsConnecting(false) // Clear connecting state when request completes
       }
     }
   }
@@ -113,6 +135,7 @@ function App() {
     setError(null)
     setIsSessionActive(true)
     setTokenUsage(null)
+    setIsConnecting(false)
   }
 
   const handleNewConversation = () => {
@@ -121,6 +144,8 @@ function App() {
     setError(null)
     setIsSessionActive(true)
     setTokenUsage(null)
+    setLastMessageTime(undefined)
+    setIsConnecting(false)
   }
 
   return (
@@ -128,6 +153,7 @@ function App() {
       <Header 
         sessionId={currentSessionId || ''}
         lastMessageTime={lastMessageTime}
+        isConnecting={isConnecting}
       />
       <ChatWindow messages={messages} isStreaming={isLoading} />
       {error && (
@@ -146,14 +172,14 @@ function App() {
           tokenUsage={tokenUsage}
         />
       ) : (
-        <div className="session-footer">
-          <div className="session-closed-message">
-            <div className="session-closed-icon">
+        <div className="session-timeout-footer">
+          <div className="session-timeout-message">
+            <div className="session-timeout-icon">
               <WifiOffIcon />
             </div>
-            <div className="session-closed-text">
-              <h3>Session Closed</h3>
-              <p>Your 2-minute session has expired. Let's start a new conversation!</p>
+            <div className="session-timeout-text">
+              <h3>Session Timed Out</h3>
+              <p>Your session has expired after 2 minutes of inactivity. Start a new conversation to continue.</p>
             </div>
             <button 
               className="new-conversation-button"
